@@ -1,41 +1,54 @@
 #!/bin/bash
 
-# Create a directory for the programs
-mkdir ~/PiPrograms
-cd ~/PiPrograms
+# Directory to store downloaded files
+INSTALL_DIR="$HOME/OGradyLabApps"
 
-# Download the programs and icons from GitHub
-wget https://github.com/OGradyLab/Ramp/raw/main/Ramp.py
-wget https://github.com/OGradyLab/Pulse/raw/main/Pulse.py
-wget https://github.com/OGradyLab/Clyde/raw/main/Clyde.py
+# Create the directory
+mkdir -p $INSTALL_DIR
 
-wget https://github.com/OGradyLab/Ramp/raw/main/Ramp.png
-wget https://github.com/OGradyLab/Pulse/raw/main/Pulse.png
-wget https://github.com/OGradyLab/Clyde/raw/main/Clyde.png
+# Download Python scripts
+wget -O $INSTALL_DIR/Ramp.py https://raw.githubusercontent.com/OGradyLab/Ramp/main/Ramp.py
+wget -O $INSTALL_DIR/Pulse.py https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.py
+wget -O $INSTALL_DIR/Clyde.py https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.py
 
-# Make the programs executable
-chmod +x Ramp.py Pulse.py Clyde.py
+# Download icons
+wget -O $INSTALL_DIR/ramp_icon.png https://raw.githubusercontent.com/OGradyLab/Install/main/ramp_icon.png
+wget -O $INSTALL_DIR/pulse_icon.png https://raw.githubusercontent.com/OGradyLab/Install/main/pulse_icon.png
+wget -O $INSTALL_DIR/clyde_icon.png https://raw.githubusercontent.com/OGradyLab/Install/main/clyde_icon.png
 
-# Create desktop shortcuts
+# Make Python scripts executable
+chmod +x $INSTALL_DIR/Ramp.py
+chmod +x $INSTALL_DIR/Pulse.py
+chmod +x $INSTALL_DIR/Clyde.py
+
+# Create .desktop files
 echo "[Desktop Entry]
 Name=Ramp
-Exec=python3 ~/PiPrograms/Ramp.py
-Icon=~/PiPrograms/Ramp.png
-Type=Application" > ~/Desktop/Ramp.desktop
+Comment=Launch Ramp
+Exec=python3 $INSTALL_DIR/Ramp.py
+Icon=$INSTALL_DIR/ramp_icon.png
+Terminal=false
+Type=Application" > $HOME/Desktop/Ramp.desktop
 
 echo "[Desktop Entry]
 Name=Pulse
-Exec=python3 ~/PiPrograms/Pulse.py
-Icon=~/PiPrograms/Pulse.png
-Type=Application" > ~/Desktop/Pulse.desktop
+Comment=Launch Pulse
+Exec=python3 $INSTALL_DIR/Pulse.py
+Icon=$INSTALL_DIR/pulse_icon.png
+Terminal=false
+Type=Application" > $HOME/Desktop/Pulse.desktop
 
 echo "[Desktop Entry]
 Name=Clyde
-Exec=python3 ~/PiPrograms/Clyde.py
-Icon=~/PiPrograms/Clyde.png
-Type=Application" > ~/Desktop/Clyde.desktop
+Comment=Launch Clyde
+Exec=python3 $INSTALL_DIR/Clyde.py
+Icon=$INSTALL_DIR/clyde_icon.png
+Terminal=false
+Type=Application" > $HOME/Desktop/Clyde.desktop
 
-# Make the desktop entries executable
-chmod +x ~/Desktop/Ramp.desktop ~/Desktop/Pulse.desktop ~/Desktop/Clyde.desktop
+# Make .desktop files executable
+chmod +x $HOME/Desktop/Ramp.desktop
+chmod +x $HOME/Desktop/Pulse.desktop
+chmod +x $HOME/Desktop/Clyde.desktop
 
 echo "Installation completed!"
