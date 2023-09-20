@@ -1,57 +1,50 @@
 #!/bin/bash
 
-# Define the installation directory
-INSTALL_DIR="$HOME/PiClyde"
+# Create a directory for the PiClyde programs
+mkdir -p ~/PiClyde
 
-# Create the installation directory if it doesn't exist
-mkdir -p $INSTALL_DIR
+# Navigate to the directory
+cd ~/PiClyde
 
-# Download the Python scripts and icons
-wget -O $INSTALL_DIR/Ramp.py https://raw.githubusercontent.com/OGradyLab/Ramp/main/Ramp.py
-wget -O $INSTALL_DIR/Pulse.py https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.py
-wget -O $INSTALL_DIR/Clyde.py https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.py
+# Clone the repositories
+git clone https://github.com/OGradyLab/Ramp.git
+git clone https://github.com/OGradyLab/Pulse.git
+git clone https://github.com/OGradyLab/Clyde.git
 
-# Assuming the icons are named Ramp.png, Pulse.png, and Clyde.png and are located in the Install repository
-wget -O $INSTALL_DIR/Ramp.png https://raw.githubusercontent.com/OGradyLab/Install/main/Ramp.png
-wget -O $INSTALL_DIR/Pulse.png https://raw.githubusercontent.com/OGradyLab/Install/main/Pulse.png
-wget -O $INSTALL_DIR/Clyde.png https://raw.githubusercontent.com/OGradyLab/Install/main/Clyde.png
-
-# Make the Python scripts executable
-chmod +x $INSTALL_DIR/Ramp.py
-chmod +x $INSTALL_DIR/Pulse.py
-chmod +x $INSTALL_DIR/Clyde.py
-
-# Create desktop shortcuts
+# Create desktop shortcut for Ramp
 echo "[Desktop Entry]
-Type=Application
+Version=1.0
 Name=Ramp
-Comment=Launch Ramp
-Icon=$INSTALL_DIR/Ramp.png
-Exec=python3 $INSTALL_DIR/Ramp.py
+Comment=Run Ramp Program
+Exec=python3 ~/PiClyde/Ramp/Ramp.py
+Icon=~/PiClyde/Ramp/Ramp.png
 Terminal=false
-Categories=Utility;" > $HOME/Desktop/Ramp.desktop
-
-echo "[Desktop Entry]
 Type=Application
+Categories=Utility;Application;" > ~/Desktop/Ramp.desktop
+
+# Create desktop shortcut for Pulse
+echo "[Desktop Entry]
+Version=1.0
 Name=Pulse
-Comment=Launch Pulse
-Icon=$INSTALL_DIR/Pulse.png
-Exec=python3 $INSTALL_DIR/Pulse.py
+Comment=Run Pulse Program
+Exec=python3 ~/PiClyde/Pulse/Pulse.py
+Icon=~/PiClyde/Pulse/Pulse.png
 Terminal=false
-Categories=Utility;" > $HOME/Desktop/Pulse.desktop
-
-echo "[Desktop Entry]
 Type=Application
+Categories=Utility;Application;" > ~/Desktop/Pulse.desktop
+
+# Create desktop shortcut for Clyde
+echo "[Desktop Entry]
+Version=1.0
 Name=Clyde
-Comment=Launch Clyde
-Icon=$INSTALL_DIR/Clyde.png
-Exec=python3 $INSTALL_DIR/Clyde.py
+Comment=Run Clyde Program
+Exec=python3 ~/PiClyde/Clyde/Clyde.py
+Icon=~/PiClyde/Clyde/Clyde.png
 Terminal=false
-Categories=Utility;" > $HOME/Desktop/Clyde.desktop
+Type=Application
+Categories=Utility;Application;" > ~/Desktop/Clyde.desktop
 
-# Make the desktop shortcuts executable
-chmod +x $HOME/Desktop/Ramp.desktop
-chmod +x $HOME/Desktop/Pulse.desktop
-chmod +x $HOME/Desktop/Clyde.desktop
-
-echo "Installation completed!"
+# Mark the launchers as trusted
+gio set "$HOME/Desktop/Ramp.desktop" "metadata::trusted" yes
+gio set "$HOME/Desktop/Pulse.desktop" "metadata::trusted" yes
+gio set "$HOME/Desktop/Clyde.desktop" "metadata::trusted" yes
