@@ -26,7 +26,7 @@ Name=Ramp
 Exec=python3 $APP_DIR/Ramp.py
 Icon=$APP_DIR/Ramp.png
 Categories=Pumps;
-" > ~/Desktop/Ramp.desktop
+" > ~/.local/share/applications/Ramp.desktop
 
 echo "[Desktop Entry]
 Type=Application
@@ -34,7 +34,7 @@ Name=Pulse
 Exec=python3 $APP_DIR/Pulse.py
 Icon=$APP_DIR/Pulse.png
 Categories=Pumps;
-" > ~/Desktop/Pulse.desktop
+" > ~/.local/share/applications/Pulse.desktop
 
 echo "[Desktop Entry]
 Type=Application
@@ -42,7 +42,7 @@ Name=Clyde
 Exec=python3 $APP_DIR/Clyde.py
 Icon=$APP_DIR/Clyde.png
 Categories=Pumps;
-" > ~/Desktop/Clyde.desktop
+" > ~/.local/share/applications/Clyde.desktop
 
 # Create the Pumps directory file
 echo "[Desktop Entry]
