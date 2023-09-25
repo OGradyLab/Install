@@ -69,3 +69,5 @@ Exec=python3 /home/brian/PiClyde/Clyde/Clyde.py
 Icon=/home/brian/PiClyde/Clyde.png
 Terminal=true
 Categories=Utility;" > ~/.config/autostart/Clyde.desktop
+# Refresh the panel
+lxpanelctl restart
