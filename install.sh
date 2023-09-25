@@ -70,5 +70,3 @@ Icon=/home/brian/PiClyde/Clyde.png
 Terminal=true
 Categories=Utility;" > ~/.config/autostart/Clyde.desktop
 
-# Refresh the panel
-lxpanelctl restart
