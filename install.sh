@@ -24,8 +24,8 @@ echo "[Desktop Entry]
 Type=Application
 Name=Ramp
 Comment=Run Ramp program
-Exec=/home/pi/PiClyde/Ramp.py
-Icon=/home/pi/PiClyde/Ramp.png
+Exec=/home/brian/PiClyde/Ramp.py
+Icon=/home/brian/PiClyde/Ramp.png
 Terminal=false
 Categories=Utility;" > ~/Desktop/Ramp.desktop
 
@@ -33,8 +33,8 @@ echo "[Desktop Entry]
 Type=Application
 Name=Pulse
 Comment=Run Pulse program
-Exec=/home/pi/PiClyde/Pulse.py
-Icon=/home/pi/PiClyde/Pulse.png
+Exec=/home/brian/PiClyde/Pulse.py
+Icon=/home/brian/PiClyde/Pulse.png
 Terminal=false
 Categories=Utility;" > ~/Desktop/Pulse.desktop
 
@@ -42,8 +42,8 @@ echo "[Desktop Entry]
 Type=Application
 Name=Clyde
 Comment=Run Clyde program
-Exec=/home/pi/PiClyde/Clyde.py
-Icon=/home/pi/PiClyde/Clyde.png
+Exec=/home/brian/PiClyde/Clyde.py
+Icon=/home/brian/PiClyde/Clyde.png
 Terminal=false
 Categories=Utility;" > ~/Desktop/Clyde.desktop
 
