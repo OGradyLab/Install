@@ -21,28 +21,6 @@ chmod +x /home/brian/PiClyde/Ramp/Ramp.py
 chmod +x /home/brian/PiClyde/Pulse/Pulse.py
 chmod +x /home/brian/PiClyde/Clyde/Clyde.py
 
-# Add application launchers to LXPanel
-PANEL_CONFIG="$HOME/.config/lxpanel/LXDE/panels/panel"
-
-# Backup the original panel config
-cp $PANEL_CONFIG $PANEL_CONFIG.bak
-
-# Add the application launchers
-echo "Plugin {
-    type = launchbar
-    Config {
-        Button {
-            id=ramp.desktop
-        }
-        Button {
-            id=pulse.desktop
-        }
-        Button {
-            id=clyde.desktop
-        }
-    }
-}" >> $PANEL_CONFIG
-
 # Create .desktop files for autostart
 mkdir -p ~/.config/autostart
 
@@ -70,3 +48,24 @@ Icon=/home/brian/PiClyde/Clyde.png
 Terminal=true
 Categories=Utility;" > ~/.config/autostart/Clyde.desktop
 
+# Backup the current LXPanel configuration
+cp /home/brian/.config/lxpanel/LXDE-pi/panels/panel /home/brian/.config/lxpanel/LXDE-pi/panels/panel.backup
+
+# Add the applications to the LXPanel
+echo "Plugin {
+    type = launchbar
+    Config {
+        Button {
+            id=Ramp.desktop
+        }
+        Button {
+            id=Pulse.desktop
+        }
+        Button {
+            id=Clyde.desktop
+        }
+    }
+}" >> /home/brian/.config/lxpanel/LXDE-pi/panels/panel
+
+# Restart LXPanel to reflect the changes
+lxpanelctl restart
