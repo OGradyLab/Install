@@ -1,50 +1,35 @@
 #!/bin/bash
 
-# Create a directory for the PiClyde programs
+# Create a directory for the programs
 mkdir -p ~/PiClyde
 
-# Navigate to the directory
 cd ~/PiClyde
 
-# Clone the repositories
-git clone https://github.com/OGradyLab/Ramp.git
-git clone https://github.com/OGradyLab/Pulse.git
-git clone https://github.com/OGradyLab/Clyde.git
+# Download the programs and icons from GitHub
+wget https://raw.githubusercontent.com/OGradyLab/Install/main/Ramp.py
+wget https://raw.githubusercontent.com/OGradyLab/Install/main/Pulse.py
+wget https://raw.githubusercontent.com/OGradyLab/Install/main/Clyde.py
+wget https://raw.githubusercontent.com/OGradyLab/Install/main/Ramp.png
+wget https://raw.githubusercontent.com/OGradyLab/Install/main/Pulse.png
+wget https://raw.githubusercontent.com/OGradyLab/Install/main/Clyde.png
 
-# Create desktop shortcut for Ramp
-echo "[Desktop Entry]
-Version=1.0
-Name=Ramp
-Comment=Run Ramp Program
-Exec=python3 ~/PiClyde/Ramp/Ramp.py
-Icon=~/PiClyde/Ramp/Ramp.png
-Terminal=false
+# Make the Python scripts executable
+chmod +x Ramp.py Pulse.py Clyde.py
+
+# Create desktop icons for the programs
+for program in Ramp Pulse Clyde; do
+cat > ~/Desktop/$program.desktop <<EOL
+[Desktop Entry]
 Type=Application
-Categories=Utility;Application;" > ~/Desktop/Ramp.desktop
-
-# Create desktop shortcut for Pulse
-echo "[Desktop Entry]
-Version=1.0
-Name=Pulse
-Comment=Run Pulse Program
-Exec=python3 ~/PiClyde/Pulse/Pulse.py
-Icon=~/PiClyde/Pulse/Pulse.png
+Name=$program
+Exec=python3 ~/PiClyde/$program.py
+Icon=~/PiClyde/$program.png
 Terminal=false
-Type=Application
-Categories=Utility;Application;" > ~/Desktop/Pulse.desktop
+EOL
 
-# Create desktop shortcut for Clyde
-echo "[Desktop Entry]
-Version=1.0
-Name=Clyde
-Comment=Run Clyde Program
-Exec=python3 ~/PiClyde/Clyde/Clyde.py
-Icon=~/PiClyde/Clyde/Clyde.png
-Terminal=false
-Type=Application
-Categories=Utility;Application;" > ~/Desktop/Clyde.desktop
+# Make the .desktop files executable
+chmod +x ~/Desktop/$program.desktop
+done
 
-# Mark the launchers as trusted
-gio set "$HOME/Desktop/Ramp.desktop" "metadata::trusted" yes
-gio set "$HOME/Desktop/Pulse.desktop" "metadata::trusted" yes
-gio set "$HOME/Desktop/Clyde.desktop" "metadata::trusted" yes
+# Notify the user
+echo "Installation complete! You should now see icons for Ramp, Pulse, and Clyde on your desktop."
