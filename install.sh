@@ -1,48 +1,64 @@
 #!/bin/bash
 
-# Create the PiClyde directory
-mkdir -p /home/brian/PiClyde
+# Directory for the applications
+APP_DIR="/home/pi/PiClyde"
 
-# Navigate to the directory
-cd /home/brian/PiClyde
+# Create the application directory if it doesn't exist
+mkdir -p $APP_DIR
 
-# Clone the repositories
-git clone https://github.com/OGradyLab/Ramp.git
-git clone https://github.com/OGradyLab/Pulse.git
-git clone https://github.com/OGradyLab/Clyde.git
+# Download the Python scripts and icons
+wget -O $APP_DIR/Ramp.py https://raw.githubusercontent.com/OGradyLab/Ramp/main/Ramp.py
+wget -O $APP_DIR/Pulse.py https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.py
+wget -O $APP_DIR/Clyde.py https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.py
+wget -O $APP_DIR/Ramp.png https://raw.githubusercontent.com/OGradyLab/Ramp/main/Ramp.png
+wget -O $APP_DIR/Pulse.png https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.png
+wget -O $APP_DIR/Clyde.png https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.png
 
-# Download the icons
-wget https://raw.githubusercontent.com/OGradyLab/Ramp/main/Ramp.png
-wget https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.png
-wget https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.png
+# Make the Python scripts executable
+chmod +x $APP_DIR/Ramp.py
+chmod +x $APP_DIR/Pulse.py
+chmod +x $APP_DIR/Clyde.py
 
-# Create .desktop files and place them in ~/.local/share/applications/
-
+# Create .desktop files
 echo "[Desktop Entry]
 Type=Application
 Name=Ramp
-Exec=python3 /home/brian/PiClyde/Ramp/Ramp.py
-Icon=/home/brian/PiClyde/Ramp.png
-Terminal=false
-Categories=Utility;" > ~/.local/share/applications/Ramp.desktop
+Exec=python3 $APP_DIR/Ramp.py
+Icon=$APP_DIR/Ramp.png
+Categories=Pumps;
+" > ~/Desktop/Ramp.desktop
 
 echo "[Desktop Entry]
 Type=Application
 Name=Pulse
-Exec=python3 /home/brian/PiClyde/Pulse/Pulse.py
-Icon=/home/brian/PiClyde/Pulse.png
-Terminal=false
-Categories=Utility;" > ~/.local/share/applications/Pulse.desktop
+Exec=python3 $APP_DIR/Pulse.py
+Icon=$APP_DIR/Pulse.png
+Categories=Pumps;
+" > ~/Desktop/Pulse.desktop
 
 echo "[Desktop Entry]
 Type=Application
 Name=Clyde
-Exec=python3 /home/brian/PiClyde/Clyde/Clyde.py
-Icon=/home/brian/PiClyde/Clyde.png
-Terminal=false
-Categories=Utility;" > ~/.local/share/applications/Clyde.desktop
+Exec=python3 $APP_DIR/Clyde.py
+Icon=$APP_DIR/Clyde.png
+Categories=Pumps;
+" > ~/Desktop/Clyde.desktop
 
-# Make the .py files executable
-chmod +x /home/brian/PiClyde/Ramp/Ramp.py
-chmod +x /home/brian/PiClyde/Pulse/Pulse.py
-chmod +x /home/brian/PiClyde/Clyde/Clyde.py
+# Create the Pumps directory file
+echo "[Desktop Entry]
+Name=Pumps
+Type=Directory" > ~/.local/share/desktop-directories/Pumps.directory
+
+# Update the menu layout
+MENU_FILE=~/.config/menus/lxde-pi-applications.menu
+if [ ! -f "$MENU_FILE" ]; then
+    cp /etc/xdg/menus/lxde-pi-applications.menu ~/.config/menus/
+fi
+
+# Add the new menu category to the menu layout if it doesn't exist
+if ! grep -q "<Menu><Name>Pumps</Name><Directory>Pumps.directory</Directory><Include><Category>Pumps</Category></Include></Menu>" $MENU_FILE; then
+    sed -i '/<DefaultLayout>/i <Menu><Name>Pumps</Name><Directory>Pumps.directory</Directory><Include><Category>Pumps</Category></Include></Menu>' $MENU_FILE
+fi
+
+# Refresh the desktop to reflect changes
+lxpanelctl restart
