@@ -15,9 +15,9 @@ chmod +x Pulse.py
 chmod +x Clyde.py
 
 # Download the icons
-wget https://raw.githubusercontent.com/OGradyLab/Install/main/Ramp.png
-wget https://raw.githubusercontent.com/OGradyLab/Install/main/Pulse.png
-wget https://raw.githubusercontent.com/OGradyLab/Install/main/Clyde.png
+wget -O ~/PiClyde/Ramp.png https://raw.githubusercontent.com/OGradyLab/Ramp/main/Ramp.png
+wget -O ~/PiClyde/Pulse.png https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.png
+wget -O ~/PiClyde/Clyde.png https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.png
 
 # Create desktop entries for the programs
 echo "[Desktop Entry]
