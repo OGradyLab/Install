@@ -46,11 +46,11 @@ chmod +x /home/brian/PiClyde/Ramp/Ramp.py
 chmod +x /home/brian/PiClyde/Pulse/Pulse.py
 chmod +x /home/brian/PiClyde/Clyde/Clyde.py
 
-# Backup the panel configuration
-cp ~/.config/lxpanel/LXDE-pi/panels/panel ~/.config/lxpanel/LXDE-pi/panels/panel.backup
-
-# Add the applications to the Application Launch Bar
-sed -i '/Plugin {/,/}/ {/type = launchbar/ {N;N;N;N; s@}@\tconfig {\n\t\tButton {\n\t\t\tid=/home/brian/.local/share/applications/Ramp.desktop\n\t\t}\n\t\tButton {\n\t\t\tid=/home/brian/.local/share/applications/Pulse.desktop\n\t\t}\n\t\tButton {\n\t\t\tid=/home/brian/.local/share/applications/Clyde.desktop\n\t\t}\n\t}\n}@;};}' ~/.config/lxpanel/LXDE-pi/panels/panel
+# Add the applications to the LXDE panel
+echo "@lxpanel --profile LXDE-pi" >> ~/.config/lxsession/LXDE-pi/autostart
+echo "@python3 /home/brian/PiClyde/Ramp/Ramp.py" >> ~/.config/lxsession/LXDE-pi/autostart
+echo "@python3 /home/brian/PiClyde/Pulse/Pulse.py" >> ~/.config/lxsession/LXDE-pi/autostart
+echo "@python3 /home/brian/PiClyde/Clyde/Clyde.py" >> ~/.config/lxsession/LXDE-pi/autostart
 
 # Refresh the panel
 lxpanelctl restart
