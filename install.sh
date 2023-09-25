@@ -17,7 +17,6 @@ wget https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.png
 wget https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.png
 
 # Create .desktop files and place them in ~/.local/share/applications/
-
 echo "[Desktop Entry]
 Type=Application
 Name=Ramp
@@ -46,3 +45,12 @@ Categories=Utility;" > ~/.local/share/applications/Clyde.desktop
 chmod +x /home/brian/PiClyde/Ramp/Ramp.py
 chmod +x /home/brian/PiClyde/Pulse/Pulse.py
 chmod +x /home/brian/PiClyde/Clyde/Clyde.py
+
+# Backup the panel configuration
+cp ~/.config/lxpanel/LXDE-pi/panels/panel ~/.config/lxpanel/LXDE-pi/panels/panel.backup
+
+# Add the applications to the Application Launch Bar
+sed -i '/Plugin {/,/}/ {/type = launchbar/ {N;N;N;N; s@}@\tconfig {\n\t\tButton {\n\t\t\tid=/home/brian/.local/share/applications/Ramp.desktop\n\t\t}\n\t\tButton {\n\t\t\tid=/home/brian/.local/share/applications/Pulse.desktop\n\t\t}\n\t\tButton {\n\t\t\tid=/home/brian/.local/share/applications/Clyde.desktop\n\t\t}\n\t}\n}@;};}' ~/.config/lxpanel/LXDE-pi/panels/panel
+
+# Refresh the panel
+lxpanelctl restart
