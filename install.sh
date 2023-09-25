@@ -23,7 +23,7 @@ Type=Application
 Name=Ramp
 Exec=python3 /home/brian/PiClyde/Ramp/Ramp.py
 Icon=/home/brian/PiClyde/Ramp.png
-Terminal=true
+Terminal=false
 Categories=Utility;" > ~/.local/share/applications/Ramp.desktop
 
 echo "[Desktop Entry]
@@ -31,7 +31,7 @@ Type=Application
 Name=Pulse
 Exec=python3 /home/brian/PiClyde/Pulse/Pulse.py
 Icon=/home/brian/PiClyde/Pulse.png
-Terminal=true
+Terminal=false
 Categories=Utility;" > ~/.local/share/applications/Pulse.desktop
 
 echo "[Desktop Entry]
@@ -39,7 +39,7 @@ Type=Application
 Name=Clyde
 Exec=python3 /home/brian/PiClyde/Clyde/Clyde.py
 Icon=/home/brian/PiClyde/Clyde.png
-Terminal=true
+Terminal=false
 Categories=Utility;" > ~/.local/share/applications/Clyde.desktop
 
 # Make the .py files executable
