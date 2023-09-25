@@ -21,16 +21,14 @@ chmod +x /home/brian/PiClyde/Ramp/Ramp.py
 chmod +x /home/brian/PiClyde/Pulse/Pulse.py
 chmod +x /home/brian/PiClyde/Clyde/Clyde.py
 
-# Create .desktop files for autostart
-mkdir -p ~/.config/autostart
-
+# Create .desktop files and place them in ~/.local/share/applications/
 echo "[Desktop Entry]
 Type=Application
 Name=Ramp
 Exec=python3 /home/brian/PiClyde/Ramp/Ramp.py
 Icon=/home/brian/PiClyde/Ramp.png
 Terminal=true
-Categories=Utility;" > ~/.config/autostart/Ramp.desktop
+Categories=Utility;" > ~/.local/share/applications/Ramp.desktop
 
 echo "[Desktop Entry]
 Type=Application
@@ -38,7 +36,7 @@ Name=Pulse
 Exec=python3 /home/brian/PiClyde/Pulse/Pulse.py
 Icon=/home/brian/PiClyde/Pulse.png
 Terminal=true
-Categories=Utility;" > ~/.config/autostart/Pulse.desktop
+Categories=Utility;" > ~/.local/share/applications/Pulse.desktop
 
 echo "[Desktop Entry]
 Type=Application
@@ -46,4 +44,9 @@ Name=Clyde
 Exec=python3 /home/brian/PiClyde/Clyde/Clyde.py
 Icon=/home/brian/PiClyde/Clyde.png
 Terminal=true
-Categories=Utility;" > ~/.config/autostart/Clyde.desktop
+Categories=Utility;" > ~/.local/share/applications/Clyde.desktop
+
+# Remove any autostart configurations (if they exist)
+rm -f ~/.config/autostart/Ramp.desktop
+rm -f ~/.config/autostart/Pulse.desktop
+rm -f ~/.config/autostart/Clyde.desktop
