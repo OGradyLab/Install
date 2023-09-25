@@ -1,55 +1,48 @@
 #!/bin/bash
 
-# Create a directory for the PiClyde programs
-mkdir -p ~/PiClyde
-cd ~/PiClyde
+# Create the PiClyde directory
+mkdir -p /home/brian/PiClyde
 
-# Download the Python programs
-wget https://raw.githubusercontent.com/OGradyLab/Ramp/main/Ramp.py
-wget https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.py
-wget https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.py
+# Navigate to the directory
+cd /home/brian/PiClyde
 
-# Make the Python programs executable
-chmod +x Ramp.py
-chmod +x Pulse.py
-chmod +x Clyde.py
+# Clone the repositories
+git clone https://github.com/OGradyLab/Ramp.git
+git clone https://github.com/OGradyLab/Pulse.git
+git clone https://github.com/OGradyLab/Clyde.git
 
 # Download the icons
-wget -O ~/PiClyde/Ramp.png https://raw.githubusercontent.com/OGradyLab/Ramp/main/Ramp.png
-wget -O ~/PiClyde/Pulse.png https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.png
-wget -O ~/PiClyde/Clyde.png https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.png
+wget https://raw.githubusercontent.com/OGradyLab/Ramp/main/Ramp.png
+wget https://raw.githubusercontent.com/OGradyLab/Pulse/main/Pulse.png
+wget https://raw.githubusercontent.com/OGradyLab/Clyde/main/Clyde.png
 
-# Create desktop entries for the programs
+# Create .desktop files and place them in ~/.local/share/applications/
+
 echo "[Desktop Entry]
 Type=Application
 Name=Ramp
-Comment=Run Ramp program
-Exec=bash -c 'python3 /home/brian/PiClyde/Ramp.py'
+Exec=python3 /home/brian/PiClyde/Ramp/Ramp.py
 Icon=/home/brian/PiClyde/Ramp.png
-Terminal=false
-Categories=Utility;" > ~/Desktop/Ramp.desktop
+Terminal=true
+Categories=Utility;" > ~/.local/share/applications/Ramp.desktop
 
 echo "[Desktop Entry]
 Type=Application
 Name=Pulse
-Comment=Run Pulse program
-Exec=bash -c 'python3 /home/brian/PiClyde/Pulse.py'
+Exec=python3 /home/brian/PiClyde/Pulse/Pulse.py
 Icon=/home/brian/PiClyde/Pulse.png
-Terminal=false
-Categories=Utility;" > ~/Desktop/Pulse.desktop
+Terminal=true
+Categories=Utility;" > ~/.local/share/applications/Pulse.desktop
 
 echo "[Desktop Entry]
 Type=Application
 Name=Clyde
-Comment=Run Clyde program
-Exec=bash -c 'python3 /home/brian/PiClyde/Clyde.py'
+Exec=python3 /home/brian/PiClyde/Clyde/Clyde.py
 Icon=/home/brian/PiClyde/Clyde.png
-Terminal=false
-Categories=Utility;" > ~/Desktop/Clyde.desktop
+Terminal=true
+Categories=Utility;" > ~/.local/share/applications/Clyde.desktop
 
-# Make the desktop entries executable
-chmod +x ~/Desktop/Ramp.desktop
-chmod +x ~/Desktop/Pulse.desktop
-chmod +x ~/Desktop/Clyde.desktop
-
-echo "Installation completed!"
+# Make the .py files executable
+chmod +x /home/brian/PiClyde/Ramp/Ramp.py
+chmod +x /home/brian/PiClyde/Pulse/Pulse.py
+chmod +x /home/brian/PiClyde/Clyde/Clyde.py
