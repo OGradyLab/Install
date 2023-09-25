@@ -47,25 +47,3 @@ Exec=python3 /home/brian/PiClyde/Clyde/Clyde.py
 Icon=/home/brian/PiClyde/Clyde.png
 Terminal=true
 Categories=Utility;" > ~/.config/autostart/Clyde.desktop
-
-# Backup the current LXPanel configuration
-cp /home/brian/.config/lxpanel/LXDE-pi/panels/panel /home/brian/.config/lxpanel/LXDE-pi/panels/panel.backup
-
-# Add the applications to the LXPanel
-echo "Plugin {
-    type = launchbar
-    Config {
-        Button {
-            id=Ramp.desktop
-        }
-        Button {
-            id=Pulse.desktop
-        }
-        Button {
-            id=Clyde.desktop
-        }
-    }
-}" >> /home/brian/.config/lxpanel/LXDE-pi/panels/panel
-
-# Restart LXPanel to reflect the changes
-lxpanelctl restart
